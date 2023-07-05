@@ -1,12 +1,12 @@
-import Setup from '@TopStories/Setup';
 import React from 'react';
-import {SafeAreaView} from 'react-native';
+
+import Setup from '@TopStories/Setup';
 
 const App: React.FC = () => {
     return (
-        <SafeAreaView>
+        <>
             <Setup />
-        </SafeAreaView>
+        </>
     );
 };
 
