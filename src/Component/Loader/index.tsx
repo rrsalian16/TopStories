@@ -17,7 +17,9 @@ const style = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#53242d',
+        // backgroundColor: '#53242d',
+        backgroundColor: '#52232d',
+        // backgroundColor: '#47131E',
     },
     image: {},
     indicator: {
