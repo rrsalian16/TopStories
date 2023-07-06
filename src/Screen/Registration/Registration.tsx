@@ -1,7 +1,7 @@
 import React from 'react';
 import {Box, Button, Header, Layout, TextInput} from '@TopStories/Component';
 import {isEmail, isPassMatching, isValidPassword} from '@TopStories/Validation';
-import {useForm, useLogin} from '@TopStories/Hook';
+import {useForm, useAuth} from '@TopStories/Hook';
 import {AuthStackScreenProp} from '@TopStories/Routes/type';
 import {RouteName} from '@TopStories/Routes/routeName';
 
@@ -11,7 +11,7 @@ const Registration: React.FC<RegistrationProps> = (
     props: RegistrationProps,
 ) => {
     const {navigation} = props;
-    const {setLoggedIn} = useLogin();
+    const {dispatchRegistration} = useAuth();
 
     const email = useForm({value: '', validate: isEmail});
     const password = useForm({value: '', validate: isValidPassword});
@@ -30,7 +30,8 @@ const Registration: React.FC<RegistrationProps> = (
         !confirmPassValue ||
         isConfPassError;
 
-    const _onClickRegister = () => navigation.navigate(RouteName.LOGIN);
+    const _onClickRegister = () =>
+        dispatchRegistration({email: emailValue, password: passwordValue});
 
     return (
         <Layout.Base header={<Header title='Registration' centerTitle />}>

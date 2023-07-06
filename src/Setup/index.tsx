@@ -4,12 +4,12 @@ import AppNavigator from '@TopStories/Routes';
 import {Loader} from '@TopStories/Component';
 import RNBootSplash from 'react-native-bootsplash';
 import {navigationRef} from '@TopStories/Routes/service';
-import useLogin from '@TopStories/Hook/useLogin';
+import {useAuth} from '@TopStories/Hook';
 
 const Setup: React.FC = () => {
     const isLoading = false;
 
-    const {isLoggedIn} = useLogin();
+    const {isLoggedIn} = useAuth();
 
     useEffect(() => {
         setTimeout(() => {

@@ -4,6 +4,7 @@
         "jsx": "react",
         "skipLibCheck": true,
         "moduleResolution": "node",
+        "allowSyntheticDefaultImports": true,
         "baseUrl": ".",
         "paths": {
             "@TopStories/*": ["src/*"]

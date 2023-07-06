@@ -3,7 +3,7 @@ import axios from 'axios';
 import * as Interceptors from './Interceptors';
 import {NETWORK_CONST} from './constant';
 
-const BASE_URL = NETWORK_CONST.BASE_URL;
+const BASE_URL = NETWORK_CONST.AUTH_BASE_URL;
 
 export const BaseAxiosInstance = axios.create({
     baseURL: BASE_URL,

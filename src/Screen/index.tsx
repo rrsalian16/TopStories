@@ -1,5 +1,5 @@
-export {default as Login} from './Login';
-export {default as Registration} from './Registration';
+export {Login} from './Login';
+export {Registration} from './Registration';
 
 export {default as Dashboard} from './Dashboard';
 export {default as StoryList} from './StoryList';
