@@ -3,6 +3,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import AppNavigator from '@TopStories/Routes';
 import {Loader} from '@TopStories/Component';
 import RNBootSplash from 'react-native-bootsplash';
+import {navigationRef} from '@TopStories/Routes/service';
 
 const Setup: React.FC = () => {
     const isLoading = false;
@@ -16,7 +17,7 @@ const Setup: React.FC = () => {
     if (isLoading) return <Loader />;
 
     return (
-        <NavigationContainer>
+        <NavigationContainer ref={navigationRef}>
             <AppNavigator isLoggedIn={false} />
         </NavigationContainer>
     );
