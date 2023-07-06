@@ -15,7 +15,9 @@ const Header: React.FC<HeaderProps> = (props: HeaderProps) => {
 };
 
 const style = StyleSheet.create({
-    appBar: {},
+    appBar: {
+        backgroundColor: '#52232d',
+    },
 });
 
 export default Header;

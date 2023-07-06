@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
     Icon,
     IconButton,
@@ -11,18 +11,27 @@ type TextInputPropsType = TextInputProps & {
 };
 
 const TextInput: React.FC<TextInputPropsType> = (props: TextInputPropsType) => {
+    const [isSecure, setIsSecure] = useState(true);
     const {isPassword = false, ...rest} = props;
+
+    const onPressIcon = () => setIsSecure((prv) => !prv);
 
     return (
         <MuiTextInput
             label='Label'
             variant='outlined'
-            secureTextEntry={isPassword}
+            secureTextEntry={isSecure && isPassword}
             {...rest}
             trailing={(props) =>
                 isPassword && (
                     <IconButton
-                        icon={(props) => <Icon name='eye' {...props} />}
+                        onPress={onPressIcon}
+                        icon={(props) => (
+                            <Icon
+                                name={`${isSecure ? 'eye' : 'eye-off-outline'}`}
+                                {...props}
+                            />
+                        )}
                         {...props}
                     />
                 )

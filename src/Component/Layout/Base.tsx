@@ -31,20 +31,26 @@ const Base: React.FC<BaseProps> = (props: BaseProps) => {
     } as KeyboardAvoidingViewProps;
 
     return (
-        <SafeAreaView style={style.safeArea}>
-            <KeyboardAvoidingView
-                style={style.keyboardAvoid}
-                {...defaultKeyboardAvoidingProps}>
-                {header}
-                <View style={style.appBody}>{children}</View>
-            </KeyboardAvoidingView>
-            {footer}
-        </SafeAreaView>
+        <>
+            <SafeAreaView style={style.safeArea} />
+            <SafeAreaView style={style.safeAreaView}>
+                <KeyboardAvoidingView
+                    style={style.keyboardAvoid}
+                    {...defaultKeyboardAvoidingProps}>
+                    {header}
+                    <View style={style.appBody}>{children}</View>
+                </KeyboardAvoidingView>
+                {footer}
+            </SafeAreaView>
+        </>
     );
 };
 
 const style = StyleSheet.create({
     safeArea: {
+        backgroundColor: '#52232d',
+    },
+    safeAreaView: {
         flex: 1,
     },
     keyboardAvoid: {
