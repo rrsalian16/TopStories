@@ -1,6 +1,6 @@
 import {View, StyleSheet, Image, ActivityIndicator} from 'react-native';
 import React from 'react';
-import {PNG_IMAGE} from '@TopStories/assets';
+import {PNG_IMAGE} from '@TopStories/Assets';
 import {AppUtils} from '@TopStories/Utils';
 
 const Loader: React.FC = () => {

@@ -1,39 +1,52 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Box, Button, Header, Layout, TextInput} from '@TopStories/Component';
-import {StyleSheet} from 'react-native';
 import {AuthStackScreenProp} from '@TopStories/Routes/type';
 import {RouteName} from '@TopStories/Routes/routeName';
+import {isEmail, isValidPassword} from '@TopStories/Validation';
+import {useForm, useLogin} from '@TopStories/Hook';
 
 type LoginProps = AuthStackScreenProp<RouteName.LOGIN>;
 
 const Login: React.FC<LoginProps> = (props: LoginProps) => {
     const {navigation} = props;
 
-    const [userEmail, setUserEmail] = useState('');
-    const [userPassword, setUserPassword] = useState('');
+    const {setLoggedIn} = useLogin();
 
-    const _onChangeEmail = (email: string) => setUserEmail(email);
-    const _onChangePassword = (password: string) => setUserPassword(password);
+    const email = useForm({value: '', validate: isEmail});
+    const password = useForm({value: '', validate: isValidPassword});
+
+    const {isError: isEmailError = false, value: emailValue} = email;
+    const {isError: isPasswordError = false, value: passwordValue} = password;
+
+    const isLoginDisabled =
+        !emailValue || isEmailError || !passwordValue || isPasswordError;
 
     const _onClickRegistre = () => navigation.navigate(RouteName.REGISTRATION);
+    const _onClickLogin = () =>
+        setLoggedIn({email: emailValue, password: passwordValue});
 
     return (
         <Layout.Base header={<Header title='Login' hideLeft />}>
             <Box h={48} />
             <TextInput
+                errorMsg='Invalid Email'
+                keyboardType='email-address'
                 label='Email'
-                value={userEmail}
-                onChangeText={_onChangeEmail}
+                {...email}
             />
             <Box h={12} />
             <TextInput
+                errorMsg='Invalid Password'
                 label='Password'
-                isPassword
-                value={userPassword}
-                onChangeText={_onChangePassword}
+                {...password}
             />
             <Box h={32} />
-            <Button variant='contained' title='login' />
+            <Button
+                disabled={isLoginDisabled}
+                onPress={_onClickLogin}
+                variant='contained'
+                title='login'
+            />
             <Box h={8} />
 
             <Button
@@ -44,11 +57,5 @@ const Login: React.FC<LoginProps> = (props: LoginProps) => {
         </Layout.Base>
     );
 };
-
-const style = StyleSheet.create({
-    text: {
-        textAlign: 'center',
-    },
-});
 
 export default Login;
