@@ -5,7 +5,7 @@ import {Loader} from '@TopStories/Component';
 import RNBootSplash from 'react-native-bootsplash';
 
 const Setup: React.FC = () => {
-    const isLoading = true;
+    const isLoading = false;
 
     useEffect(() => {
         setTimeout(() => {

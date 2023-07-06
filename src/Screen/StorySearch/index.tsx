@@ -1,12 +1,12 @@
 import {View, Text} from 'react-native';
 import React from 'react';
 
-const NewsList = () => {
+const StorySearch = () => {
     return (
         <View>
-            <Text>NewsList</Text>
+            <Text>Search</Text>
         </View>
     );
 };
 
-export default NewsList;
+export default StorySearch;

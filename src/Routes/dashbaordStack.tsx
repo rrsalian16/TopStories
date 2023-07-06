@@ -3,7 +3,12 @@ import {RouteName} from './routeName';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {DashboardStackParamList} from './type';
 
-import {Dashboard, NewsDetail, NewsList, Search} from '@TopStories/Screen';
+import {
+    Dashboard,
+    StoryDetail,
+    StoryList,
+    StorySearch,
+} from '@TopStories/Screen';
 
 const Stack = createNativeStackNavigator<DashboardStackParamList>();
 
@@ -16,9 +21,15 @@ const DashboardStack = () => {
             }}
             initialRouteName={RouteName.DASHBOARD}>
             <Stack.Screen name={RouteName.DASHBOARD} component={Dashboard} />
-            <Stack.Screen name={RouteName.NEWS_LIST} component={NewsList} />
-            <Stack.Screen name={RouteName.NEWS_DETAIL} component={NewsDetail} />
-            <Stack.Screen name={RouteName.NEWS_SEARCH} component={Search} />
+            <Stack.Screen name={RouteName.NEWS_LIST} component={StoryList} />
+            <Stack.Screen
+                name={RouteName.NEWS_DETAIL}
+                component={StoryDetail}
+            />
+            <Stack.Screen
+                name={RouteName.NEWS_SEARCH}
+                component={StorySearch}
+            />
         </Stack.Navigator>
     );
 };

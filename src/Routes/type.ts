@@ -1,12 +1,12 @@
 import {RouteName} from '@TopStories/Routes/routeName';
-import {NewsDetailsParams} from '@TopStories/Screen/NewsDetail/type';
+import {StoryDetailsParams} from '@TopStories/Screen/StoryDetail/type';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 
 // Dashboard Stack
 export type DashboardStackParamList = {
     [RouteName.DASHBOARD]: undefined;
     [RouteName.NEWS_LIST]: undefined;
-    [RouteName.NEWS_DETAIL]: NewsDetailsParams;
+    [RouteName.NEWS_DETAIL]: StoryDetailsParams;
     [RouteName.NEWS_SEARCH]: undefined;
 };
 
