@@ -3,11 +3,18 @@ import {AxiosRequestConfig, AxiosResponse} from 'axios';
 import {call, put, takeLatest} from 'redux-saga/effects';
 import {actions} from './reducer';
 import {SecureStorageKey, SecureUtils} from '@TopStories/Utils/secureStorage';
+import {setGlobalBaseUrl, setGlobalHeader} from '@TopStories/Network/axios';
+import {NETWORK_CONST} from '@TopStories/Network/constant';
 
-interface PayloadType {
+type PayloadType = {
     emai: string;
     password: string;
-}
+};
+
+type ResponseData = {
+    access_token: string;
+    refresh_token: string;
+};
 
 const {request, success, error} = actions;
 
@@ -30,8 +37,15 @@ export function* dashboardSagaWorker({payload}: ReturnType<typeof request>) {
         const response: AxiosResponse<unknown> = yield call(userLogin, payload);
         const {data, status} = response;
         if (status === 200) {
-            const {access_token = ''} = data as {access_token: string};
-            SecureUtils.set(SecureStorageKey.ACCESS_TOKEN, access_token);
+            const {access_token = '', refresh_token = ''} =
+                data as ResponseData;
+
+            if (access_token || refresh_token) {
+                setGlobalBaseUrl(NETWORK_CONST.BASE_URL);
+                setGlobalHeader(access_token);
+                SecureUtils.set(SecureStorageKey.ACCESS_TOKEN, access_token);
+                SecureUtils.set(SecureStorageKey.REFRESH_TOKEN, refresh_token);
+            }
         }
         yield put(success(response.data));
     } catch (_error) {

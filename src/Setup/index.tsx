@@ -4,12 +4,9 @@ import AppNavigator from '@TopStories/Routes';
 import {Loader} from '@TopStories/Component';
 import RNBootSplash from 'react-native-bootsplash';
 import {navigationRef} from '@TopStories/Routes/service';
-import {useAuth} from '@TopStories/Hook';
 
 const Setup: React.FC = () => {
     const isLoading = false;
-
-    const {isLoggedIn} = useAuth();
 
     useEffect(() => {
         setTimeout(() => {
@@ -21,7 +18,7 @@ const Setup: React.FC = () => {
 
     return (
         <NavigationContainer ref={navigationRef}>
-            <AppNavigator isLoggedIn={isLoggedIn} />
+            <AppNavigator />
         </NavigationContainer>
     );
 };
