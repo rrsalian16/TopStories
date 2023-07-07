@@ -16,10 +16,11 @@ type ResponseData = {
     refresh_token: string;
 };
 
-const {request, success, error} = actions;
+const {request, success, error, clear} = actions;
 
-export default function* dashboardSagaWatcher() {
-    yield takeLatest(request, dashboardSagaWorker);
+export default function* loginSagaWatcher() {
+    yield takeLatest(request, loginRequestSagaWorker);
+    yield takeLatest(clear, LoginClearWorker);
 }
 
 export function userLogin(data: unknown) {
@@ -32,7 +33,7 @@ export function userLogin(data: unknown) {
     return Network.networkCall(config);
 }
 
-export function* dashboardSagaWorker({payload}: ReturnType<typeof request>) {
+export function* loginRequestSagaWorker({payload}: ReturnType<typeof request>) {
     try {
         const response: AxiosResponse<unknown> = yield call(userLogin, payload);
         const {data, status} = response;
@@ -50,5 +51,13 @@ export function* dashboardSagaWorker({payload}: ReturnType<typeof request>) {
         yield put(success(response.data));
     } catch (_error) {
         yield put(error(_error));
+    }
+}
+
+export function* LoginClearWorker() {
+    try {
+        SecureUtils.clearStorage();
+    } finally {
+        yield put(clear());
     }
 }

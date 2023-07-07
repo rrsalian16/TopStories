@@ -14,13 +14,9 @@ const set = async (key: SecureStorageKey, value: unknown) => {
 };
 
 const get = async (key: SecureStorageKey) => {
-    try {
-        const session = await EncryptedStorage.getItem(key);
+    const session = (await EncryptedStorage.getItem(key)) || '';
 
-        if (session !== undefined) return true;
-    } catch (error) {
-        console.log(error);
-    }
+    if (session !== undefined) return session as string;
 };
 
 const remove = async (key: SecureStorageKey) => {

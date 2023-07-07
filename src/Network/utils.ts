@@ -1,10 +1,10 @@
 import {AxiosRequestConfig} from 'axios';
-import {END_POINTS} from '../endpoint';
+import {END_POINTS} from './endpoint';
 import {SecureStorageKey, SecureUtils} from '@TopStories/Utils';
-import {Network} from '../apiRequest';
+import {Network} from './apiRequest';
 import {store} from '@TopStories/Store';
 import {actions as LoginAction} from '@TopStories/Screen/Login/reducer';
-import {setGlobalHeader} from '../axios';
+import {setGlobalHeader} from './axios';
 
 export const tokenRefresh = async () => {
     const refreshToken = SecureUtils.get(SecureStorageKey.REFRESH_TOKEN);
@@ -24,4 +24,5 @@ export const tokenRefresh = async () => {
     setGlobalHeader(access_token);
     SecureUtils.set(SecureStorageKey.ACCESS_TOKEN, access_token);
     SecureUtils.set(SecureStorageKey.REFRESH_TOKEN, refresh_token);
+    return access_token as string;
 };

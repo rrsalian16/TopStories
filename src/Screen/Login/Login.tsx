@@ -34,8 +34,8 @@ const Login: React.FC<LoginProps> = (props: LoginProps) => {
 
     const errorMsg = get(error, ['response', 'data', 'message']);
 
-    const email = useForm({value: '', validate: isEmail});
-    const password = useForm({value: '', validate: isValidPassword});
+    const email = useForm({value: 'nilson7@email.com', validate: isEmail});
+    const password = useForm({value: 'nilson', validate: isValidPassword});
 
     const {isError: isEmailError = false, value: emailValue} = email;
     const {isError: isPasswordError = false, value: passwordValue} = password;

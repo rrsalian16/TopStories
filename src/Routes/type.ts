@@ -5,9 +5,9 @@ import {NativeStackScreenProps} from '@react-navigation/native-stack';
 // Dashboard Stack
 export type DashboardStackParamList = {
     [RouteName.DASHBOARD]: undefined;
-    [RouteName.NEWS_LIST]: undefined;
-    [RouteName.NEWS_DETAIL]: StoryDetailsParams;
-    [RouteName.NEWS_SEARCH]: undefined;
+    [RouteName.STORY_LIST]: undefined;
+    [RouteName.STORY_DETAIL]: StoryDetailsParams;
+    [RouteName.STORY_SEARCH]: undefined;
 };
 
 //Auth Stack

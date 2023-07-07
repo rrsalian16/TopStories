@@ -7,7 +7,7 @@ export enum RouteName {
 
     DASHBOARD_STACK = 'DashboardStack',
     DASHBOARD = 'Dashboard',
-    NEWS_LIST = 'StoryList',
-    NEWS_DETAIL = 'StoryDetail',
-    NEWS_SEARCH = 'StorySearch',
+    STORY_LIST = 'StoryList',
+    STORY_DETAIL = 'StoryDetail',
+    STORY_SEARCH = 'StorySearch',
 }

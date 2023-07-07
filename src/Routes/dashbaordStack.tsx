@@ -21,13 +21,13 @@ const DashboardStack = () => {
             }}
             initialRouteName={RouteName.DASHBOARD}>
             <Stack.Screen name={RouteName.DASHBOARD} component={Dashboard} />
-            <Stack.Screen name={RouteName.NEWS_LIST} component={StoryList} />
+            <Stack.Screen name={RouteName.STORY_LIST} component={StoryList} />
             <Stack.Screen
-                name={RouteName.NEWS_DETAIL}
+                name={RouteName.STORY_DETAIL}
                 component={StoryDetail}
             />
             <Stack.Screen
-                name={RouteName.NEWS_SEARCH}
+                name={RouteName.STORY_SEARCH}
                 component={StorySearch}
             />
         </Stack.Navigator>

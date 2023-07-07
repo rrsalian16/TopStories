@@ -1,8 +1,8 @@
-import {actions as LoginActions} from '@TopStories/Screen/Login/reducer';
-import {actions as RegistrationReducer} from '@TopStories/Screen/Registration/reducer';
+import {LoginActions} from '@TopStories/Screen/Login';
 import {useAppDispatch, useAppSelector} from './redux';
 import {get} from 'lodash';
 import {useState} from 'react';
+import {RegistrationActions} from '@TopStories/Screen/Registration';
 
 export type SetLoginProps = {
     email: string;
@@ -25,8 +25,8 @@ const useAuth = () => {
         dispatch(LoginActions.request({email, password}));
     };
     const dispatchRegistration = ({email, password}: SetLoginProps) => {
-        dispatch(RegistrationReducer.clear());
-        dispatch(RegistrationReducer.request({email, password}));
+        dispatch(RegistrationActions.clear());
+        dispatch(RegistrationActions.request({email, password}));
     };
 
     const setLoggedOut = () => {
