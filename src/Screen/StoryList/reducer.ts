@@ -3,7 +3,7 @@ import {StoryType} from './type';
 
 type StoryListState = {
     loading: boolean;
-    data?: unknown;
+    data?: StoryType[];
     error?: unknown;
 };
 
