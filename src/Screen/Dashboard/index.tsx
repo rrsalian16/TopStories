@@ -14,7 +14,7 @@ const Dashboard: React.FC<DashboardProps> = (props: DashboardProps) => {
     };
 
     return (
-        <Layout.Base header={<Header title='Dashbaord' />}>
+        <Layout.Base header={<Header title='Dashbaord' hideLeft />}>
             <View style={style.container}>
                 <Button title='Go to List' onPress={_onClickButton} />
             </View>

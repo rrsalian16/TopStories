@@ -21,16 +21,17 @@ const useAuth = () => {
     if (accesToken) setLoggedIn(true);
 
     const dispatchLogin = ({email, password}: SetLoginProps) => {
-        dispatch(LoginActions.clear());
+        dispatch(LoginActions.clearState());
         dispatch(LoginActions.request({email, password}));
     };
+
     const dispatchRegistration = ({email, password}: SetLoginProps) => {
         dispatch(RegistrationActions.clear());
         dispatch(RegistrationActions.request({email, password}));
     };
 
     const setLoggedOut = () => {
-        dispatch(LoginActions.clear());
+        dispatch(LoginActions.clearState());
     };
 
     return {

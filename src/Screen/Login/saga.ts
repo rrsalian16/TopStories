@@ -16,7 +16,7 @@ type ResponseData = {
     refresh_token: string;
 };
 
-const {request, success, error, clear} = actions;
+const {request, success, error, clear, clearState} = actions;
 
 export default function* loginSagaWatcher() {
     yield takeLatest(request, loginRequestSagaWorker);
@@ -37,10 +37,14 @@ export function* loginRequestSagaWorker({payload}: ReturnType<typeof request>) {
     try {
         const response: AxiosResponse<unknown> = yield call(userLogin, payload);
         const {data, status} = response;
+
+        console.log('response', response);
+
         if (status === 200) {
             const {access_token = '', refresh_token = ''} =
                 data as ResponseData;
 
+            console.log('access_token', access_token, refresh_token);
             if (access_token || refresh_token) {
                 setGlobalBaseUrl(NETWORK_CONST.BASE_URL);
                 setGlobalHeader(access_token);
@@ -57,7 +61,8 @@ export function* loginRequestSagaWorker({payload}: ReturnType<typeof request>) {
 export function* LoginClearWorker() {
     try {
         SecureUtils.clearStorage();
+        setGlobalBaseUrl(NETWORK_CONST.AUTH_BASE_URL);
     } finally {
-        yield put(clear());
+        yield put(clearState());
     }
 }

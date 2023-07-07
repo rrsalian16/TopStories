@@ -26,7 +26,10 @@ const loginReducer = createSlice({
         error(state: LoginState, action: PayloadAction<unknown>) {
             return {...state, loading: false, error: action.payload};
         },
-        clear: () => initialState,
+        clear(state: LoginState) {
+            return {...state, loading: true};
+        },
+        clearState: () => initialState,
     },
 });
 
