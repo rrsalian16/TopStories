@@ -6,6 +6,7 @@ export {default as Box} from './Box';
 export {default as Error} from './Error';
 export {default as Text} from './Text';
 export {default as StoryItem} from './StoryItem';
+export {default as ErrorBoundry} from './ErrorBoundry';
 
 import * as Layout from './Layout';
 

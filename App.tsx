@@ -9,17 +9,21 @@ import {IconComponentProvider} from '@react-native-material/core';
 
 //@ts-ignore
 import MaterialCommunityIcons from 'react-native-vector-icons/dist/MaterialCommunityIcons';
+import {ErrorBoundry} from '@TopStories/Component';
 
 const App: React.FC = () => {
     return (
-        <StoreProvider store={store}>
-            <PersistGate loading={null} persistor={persistor}>
-                {/* @ts-ignore */}
-                <IconComponentProvider IconComponent={MaterialCommunityIcons}>
-                    <Setup />
-                </IconComponentProvider>
-            </PersistGate>
-        </StoreProvider>
+        <ErrorBoundry>
+            <StoreProvider store={store}>
+                <PersistGate loading={null} persistor={persistor}>
+                    {/* @ts-ignore */}
+                    <IconComponentProvider
+                        IconComponent={MaterialCommunityIcons}>
+                        <Setup />
+                    </IconComponentProvider>
+                </PersistGate>
+            </StoreProvider>
+        </ErrorBoundry>
     );
 };
 
