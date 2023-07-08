@@ -15,7 +15,7 @@ const getLeadingImage = (uri: string) => {
 };
 
 type StoryItemProps = {
-    key: string | number;
+    key?: string | number;
     title: string;
     leadingUrl?: string;
     onPress?: () => void;

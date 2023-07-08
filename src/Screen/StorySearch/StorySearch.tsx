@@ -1,4 +1,4 @@
-import {StyleSheet, TouchableOpacity, View} from 'react-native';
+import {FlatList, StyleSheet, TouchableOpacity, View} from 'react-native';
 import React, {useCallback, useEffect} from 'react';
 import {
     Header,
@@ -7,8 +7,12 @@ import {
     Text,
     TextInput,
 } from '@TopStories/Component';
-import {useForm} from '@TopStories/Hook';
-import {useAppDispatch, useAppSelector} from '@TopStories/Hook/redux';
+import {
+    useAppDispatch,
+    useAppSelector,
+    useForm,
+    usePrevious,
+} from '@TopStories/Hook';
 import {debounce, get} from 'lodash';
 import {StorySearchActions} from '.';
 import {ActivityIndicator, Badge} from '@react-native-material/core';
@@ -28,6 +32,7 @@ const StorySearch: React.FC<StorySearchProps> = (props: StorySearchProps) => {
     const dispatch = useAppDispatch();
     const searchResponse = useAppSelector((state) => state.search);
     const searchValue = search.value;
+    const prevValue = usePrevious(search.value);
 
     const data = get(searchResponse, ['data']);
     const error = get(searchResponse, ['error']);
@@ -42,7 +47,9 @@ const StorySearch: React.FC<StorySearchProps> = (props: StorySearchProps) => {
     }, [searchValue]);
 
     const searchStory = (value: string) => {
-        dispatch(StorySearchActions.request(value));
+        const page = value === prevValue ? data?.page || 1 : 1;
+
+        dispatch(StorySearchActions.request({search: value, page}));
     };
 
     const clearResult = () => {
@@ -66,6 +73,12 @@ const StorySearch: React.FC<StorySearchProps> = (props: StorySearchProps) => {
     );
 
     const onPressHistoryBanner = (value: string) => search.setValue(value);
+    const onEndReached = () => {
+        if (!searchValue) return;
+        const page =
+            searchValue === prevValue ? (data && data?.page + 1) || 1 : 1;
+        dispatch(StorySearchActions.request({search: searchValue, page}));
+    };
 
     const showSearchHistory = () => (
         <View style={style.bannerContainer}>
@@ -79,25 +92,34 @@ const StorySearch: React.FC<StorySearchProps> = (props: StorySearchProps) => {
         </View>
     );
 
-    const _renderStoryList = () =>
-        data?.docs.map(({abstract, multimedia, section_name, _id}, index) => {
-            const _title = AppUtils.getTrimedString(abstract, TITLE_LIMIT);
-            const leading =
-                multimedia[0]?.url && IMAGE_BASE_URL + multimedia[0]?.url;
+    const _renderStoryList = () => (
+        <FlatList
+            style={{marginBottom: 150}}
+            showsVerticalScrollIndicator={false}
+            data={data?.docs}
+            onEndReached={onEndReached}
+            keyExtractor={(item) => item.pub_date}
+            onEndReachedThreshold={0.2}
+            renderItem={({item, index}) => {
+                const {abstract, multimedia, section_name, _id} = item;
+                const _title = AppUtils.getTrimedString(abstract, TITLE_LIMIT);
+                const leading =
+                    multimedia[0]?.url && IMAGE_BASE_URL + multimedia[0]?.url;
 
-            return (
-                <StoryItem
-                    onPress={() => _onClickListItem(index)}
-                    key={_id}
-                    title={_title}
-                    leadingUrl={leading}
-                    overline={section_name}
-                />
-            );
-        });
+                return (
+                    <StoryItem
+                        onPress={() => _onClickListItem(index)}
+                        title={_title}
+                        leadingUrl={leading}
+                        overline={section_name}
+                    />
+                );
+            }}
+        />
+    );
 
     return (
-        <Layout.Scrollable header={<Header title='Search' />}>
+        <Layout.Base header={<Header title='Search' />}>
             <View style={style.serachContainer}>
                 <TextInput
                     label='Search'
@@ -109,7 +131,7 @@ const StorySearch: React.FC<StorySearchProps> = (props: StorySearchProps) => {
             {isLoading && <ActivityIndicator style={style.loader} />}
             {data?.docs.length && _renderStoryList()}
             {isNoResultFound && <Text>No Resutl Found</Text>}
-        </Layout.Scrollable>
+        </Layout.Base>
     );
 };
 

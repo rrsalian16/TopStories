@@ -1,7 +1,6 @@
 import {View, StyleSheet} from 'react-native';
 import React, {useCallback, useEffect} from 'react';
 import {Error, Header, Layout, StoryItem, Text} from '@TopStories/Component';
-import {useAppDispatch, useAppSelector} from '@TopStories/Hook/redux';
 import {StoryListActions} from '.';
 import {capitalize, get} from 'lodash';
 import {ActivityIndicator} from '@react-native-material/core';
@@ -9,6 +8,7 @@ import {DashbaordStackScreenProp} from '@TopStories/Routes/type';
 import {RouteName} from '@TopStories/Routes/routeName';
 import {AppUtils} from '@TopStories/Utils';
 import {DetailsType} from '../StoryDetail/type';
+import {useAppDispatch, useAppSelector} from '@TopStories/Hook';
 
 type StoryListProps = DashbaordStackScreenProp<RouteName.STORY_LIST>;
 const TITLE_LIMIT = 50;

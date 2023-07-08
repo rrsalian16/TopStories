@@ -1,6 +1,7 @@
 import {MultiMediaType} from '../StoryList';
 
 export type SearchResponse = {
+    page: number;
     docs: DocType[];
     meta: {
         hits: number;

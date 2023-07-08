@@ -4,11 +4,11 @@ import {DashbaordStackScreenProp} from '@TopStories/Routes/type';
 import {RouteName} from '@TopStories/Routes/routeName';
 import {get} from 'lodash';
 import {Header, Layout, Text} from '@TopStories/Component';
-import {useAppSelector} from '@TopStories/Hook/redux';
 import {StoryType} from '../StoryList';
 import {AppUtils} from '@TopStories/Utils';
 import {DetailsType} from './type';
 import {getStoryDetails} from './utils';
+import {useAppSelector} from '@TopStories/Hook';
 
 const IMAGE_BASE_URL = 'https://www.nytimes.com/';
 
