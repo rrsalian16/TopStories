@@ -5,11 +5,7 @@ import {actions} from './reducer';
 import {SecureStorageKey, SecureUtils} from '@TopStories/Utils/secureStorage';
 import {setGlobalBaseUrl, setGlobalHeader} from '@TopStories/Network/axios';
 import {NETWORK_CONST} from '@TopStories/Network/constant';
-
-type PayloadType = {
-    emai: string;
-    password: string;
-};
+import {SetLoginProps} from '@TopStories/Hook/useAuth';
 
 type ResponseData = {
     access_token: string;
@@ -23,7 +19,7 @@ export default function* loginSagaWatcher() {
     yield takeLatest(clear, LoginClearWorker);
 }
 
-export function userLogin(data: unknown) {
+export function userLogin(data: SetLoginProps) {
     const config: AxiosRequestConfig = {
         url: END_POINTS.LOGIN,
         method: 'POST',

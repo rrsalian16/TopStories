@@ -1,5 +1,5 @@
 import {PayloadAction, createSlice} from '@reduxjs/toolkit';
-import {StoryType} from './type';
+import {StoryType, StoyListPrams} from './type';
 
 type StoryListState = {
     loading: boolean;
@@ -17,7 +17,7 @@ const storyListReducer = createSlice({
     name: 'storyList',
     initialState,
     reducers: {
-        request(state: StoryListState) {
+        request(state: StoryListState, action: PayloadAction<StoyListPrams>) {
             return {...state, loading: true};
         },
         success(state: StoryListState, action: PayloadAction<StoryType[]>) {

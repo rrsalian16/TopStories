@@ -1,11 +1,12 @@
 import {RouteName} from '@TopStories/Routes/routeName';
 import {StoryDetailsParams} from '@TopStories/Screen/StoryDetail/type';
+import {StoyListPrams} from '@TopStories/Screen/StoryList';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 
 // Dashboard Stack
 export type DashboardStackParamList = {
     [RouteName.DASHBOARD]: undefined;
-    [RouteName.STORY_LIST]: undefined;
+    [RouteName.STORY_LIST]: StoyListPrams;
     [RouteName.STORY_DETAIL]: StoryDetailsParams;
     [RouteName.STORY_SEARCH]: undefined;
 };

@@ -5,13 +5,9 @@ export const END_POINTS = {
     REGISTRATION: '/auth/register',
     TOKEN_REFRESH: '/auth/refresh',
 
-    TOP_STORIES: `/science.json?api-key=${NETWORK_CONST.API_KEY}`,
+    TOP_STORIES: (key = 'science') =>
+        `/${key}.json?api-key=${NETWORK_CONST.API_KEY}`,
     STORY_COMMENTS: '/community-api-product/1/overview',
-    STORY_SEARCH: '/docs/articlesearch-product/1/overview',
+    STORY_SEARCH: (search: string) =>
+        `/articlesearch.json?q=${search}&api-key=${NETWORK_CONST.API_KEY}`,
 };
-
-/* 
-
-https://api.nytimes.com/svc/topstories/v2/arts.json?api-key=FkSFLgSBoCPsvvynyMD1E1IvO1GmmtQY
-
-*/
