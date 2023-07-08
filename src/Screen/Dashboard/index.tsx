@@ -2,9 +2,8 @@ import {View, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import React from 'react';
 import {DashbaordStackScreenProp} from '@TopStories/Routes/type';
 import {RouteName} from '@TopStories/Routes/routeName';
-import {Header, Layout} from '@TopStories/Component';
+import {Header, Layout, Text} from '@TopStories/Component';
 import {PNG_IMAGE} from '@TopStories/Assets';
-import Text from '@TopStories/Component/Text';
 
 type DashboardProps = DashbaordStackScreenProp<RouteName.DASHBOARD>;
 

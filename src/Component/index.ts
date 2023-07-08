@@ -4,6 +4,7 @@ export {default as Button} from './Button';
 export {default as Header} from './Header';
 export {default as Box} from './Box';
 export {default as Error} from './Error';
+export {default as Text} from './Text';
 
 import * as Layout from './Layout';
 
