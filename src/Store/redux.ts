@@ -1,6 +1,7 @@
 import {LoginReducer} from '@TopStories/Screen/Login';
 import {RegistrationReducer} from '@TopStories/Screen/Registration';
 import {StoryListReducer} from '@TopStories/Screen/StoryList';
+import {StorySearchReducer} from '@TopStories/Screen/StorySearch';
 import {combineReducers} from 'redux';
 
 export default combineReducers({
@@ -9,4 +10,5 @@ export default combineReducers({
         registration: RegistrationReducer,
     }),
     storyList: StoryListReducer,
+    search: StorySearchReducer,
 });

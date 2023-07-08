@@ -1,10 +1,10 @@
-import {View, StyleSheet, Image} from 'react-native';
-import React, {useEffect} from 'react';
-import {Error, Header, Layout, Text} from '@TopStories/Component';
+import {View, StyleSheet} from 'react-native';
+import React, {useCallback, useEffect} from 'react';
+import {Error, Header, Layout, StoryItem, Text} from '@TopStories/Component';
 import {useAppDispatch, useAppSelector} from '@TopStories/Hook/redux';
 import {StoryListActions} from '.';
 import {capitalize, get} from 'lodash';
-import {ActivityIndicator, ListItem} from '@react-native-material/core';
+import {ActivityIndicator} from '@react-native-material/core';
 import {DashbaordStackScreenProp} from '@TopStories/Routes/type';
 import {RouteName} from '@TopStories/Routes/routeName';
 import {AppUtils} from '@TopStories/Utils';
@@ -27,8 +27,10 @@ const StoryList: React.FC<StoryListProps> = (props: StoryListProps) => {
         dispatch(StoryListActions.request({type: storyType}));
     }, [storyType]);
 
-    const _onClickListItem = (id: number) =>
-        navigation.navigate(RouteName.STORY_DETAIL, {id});
+    const _onClickListItem = useCallback(
+        (id: number) => navigation.navigate(RouteName.STORY_DETAIL, {id}),
+        [],
+    );
 
     if (isLoading) return <ActivityIndicator style={style.container} />;
 
@@ -44,36 +46,19 @@ const StoryList: React.FC<StoryListProps> = (props: StoryListProps) => {
             </Layout.Scrollable>
         );
 
-    const getLeadingImage = (uri: string) => {
-        if (!uri) return;
-        return (
-            <Image
-                style={style.listImage}
-                source={{
-                    uri,
-                }}
-            />
-        );
-    };
-
     const _renderStoryList = () =>
         data.map(({uri, title, multimedia, section}, index) => {
             const _title = AppUtils.getTrimedString(title, TITLE_LIMIT);
             const leading = multimedia && multimedia[0]?.url;
-            const leadingImage = getLeadingImage(leading);
 
             return (
-                title && (
-                    <View style={style.listStyle} key={uri}>
-                        <ListItem
-                            onPress={() => _onClickListItem(index)}
-                            leadingMode='image'
-                            leading={leadingImage}
-                            overline={section}
-                            title={_title}
-                        />
-                    </View>
-                )
+                <StoryItem
+                    onPress={() => _onClickListItem(index)}
+                    key={uri}
+                    title={_title}
+                    leadingUrl={leading}
+                    overline={section}
+                />
             );
         });
 

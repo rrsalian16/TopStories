@@ -1,4 +1,4 @@
-type MultiMediaType = {
+export type MultiMediaType = {
     caption: string;
     copyright: string;
     format: string;

@@ -2,7 +2,7 @@ export const NETWORK_CONST = {
     AXIOS_TIMEOUT: 60000,
     API_KEY: 'FkSFLgSBoCPsvvynyMD1E1IvO1GmmtQY',
     AUTH_BASE_URL: 'http://localhost:8000',
-    BASE_URL: 'https://api.nytimes.com/svc/topstories/v2',
+    BASE_URL: 'https://api.nytimes.com/svc',
 };
 
 /* 

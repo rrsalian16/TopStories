@@ -22,15 +22,8 @@ const Login: React.FC<LoginProps> = (props: LoginProps) => {
 
     const {loginData, dispatchLogin} = useAuth();
 
-    const data = get(loginData, ['data']);
     const error = get(loginData, ['error']);
     const isLoading = get(loginData, ['loading'], false);
-
-    console.log('====================================');
-    console.log(data);
-    console.log(error);
-    console.log(isLoading);
-    console.log('====================================');
 
     const errorMsg = get(error, ['response', 'data', 'message']);
 

@@ -69,7 +69,7 @@ const style = StyleSheet.create({
         paddingBottom: 24,
         flexGrow: 1,
     },
-    scrollViewContainer: {flex: 1},
+    scrollViewContainer: {},
 });
 
 export default Scrollable;
