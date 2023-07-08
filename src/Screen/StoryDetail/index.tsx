@@ -7,6 +7,10 @@ import {Header, Layout, Text} from '@TopStories/Component';
 import {useAppSelector} from '@TopStories/Hook/redux';
 import {StoryType} from '../StoryList';
 import {AppUtils} from '@TopStories/Utils';
+import {DetailsType} from './type';
+import {getStoryDetails} from './utils';
+
+const IMAGE_BASE_URL = 'https://www.nytimes.com/';
 
 type StoryDetailProps = DashbaordStackScreenProp<RouteName.STORY_DETAIL>;
 const DATE_FORMATE = {
@@ -18,18 +22,28 @@ const DATE_FORMATE = {
 
 const StoryDetail = (props: StoryDetailProps) => {
     const id = get(props, ['route', 'params', 'id']) as number;
+    const from = get(props, ['route', 'params', 'from']) as DetailsType;
 
-    const storsyList = useAppSelector((state) => state.storyList.data);
-    const story = (storsyList && storsyList[id]) as StoryType;
+    const storsyList = useAppSelector(
+        (state) => state.storyList.data,
+    ) as StoryType[];
+    const storsySearchList = useAppSelector((state) => state.search.data);
+
+    const listStory = storsyList && storsyList[id];
+    const searchStory = storsySearchList?.docs[id];
 
     const {title, multimedia, abstract, section, url, byline, published_date} =
-        story;
+        getStoryDetails(from, listStory, searchStory);
     const _onClickLInk = (url: string) => AppUtils.openWebUrl(url);
 
-    const _published_date = new Date(published_date).toLocaleDateString(
+    const _published_date = new Date(`${published_date}`).toLocaleDateString(
         'en-us',
         DATE_FORMATE,
     );
+
+    const imageUrl = multimedia && multimedia[0]?.url;
+    const multiMediaUrl =
+        from === DetailsType.LIST ? imageUrl : `${IMAGE_BASE_URL}${imageUrl}`;
 
     return (
         <Layout.Scrollable header={<Header title='' />}>
@@ -46,7 +60,9 @@ const StoryDetail = (props: StoryDetailProps) => {
                 <Text style={style.date} variant='overline'>
                     {_published_date}
                 </Text>
-                <Image style={style.image} source={{uri: multimedia[0].url}} />
+                {imageUrl && (
+                    <Image style={style.image} source={{uri: multiMediaUrl}} />
+                )}
                 <Text variant='body2'>{abstract}</Text>
                 <Text
                     style={style.link}
@@ -78,7 +94,9 @@ const style = StyleSheet.create({
         marginTop: 5,
         marginBottom: 5,
     },
-    date: {},
+    date: {
+        marginBottom: 10,
+    },
     image: {
         resizeMode: 'stretch',
         marginVertical: 20,

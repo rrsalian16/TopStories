@@ -13,11 +13,17 @@ import {debounce, get} from 'lodash';
 import {StorySearchActions} from '.';
 import {ActivityIndicator, Badge} from '@react-native-material/core';
 import {AppUtils} from '@TopStories/Utils';
+import {DashbaordStackScreenProp} from '@TopStories/Routes/type';
+import {RouteName} from '@TopStories/Routes/routeName';
+import {DetailsType} from '../StoryDetail/type';
 
 const TITLE_LIMIT = 50;
 const IMAGE_BASE_URL = 'https://www.nytimes.com/';
 
-const StorySearch: React.FC = () => {
+type StorySearchProps = DashbaordStackScreenProp<RouteName.STORY_SEARCH>;
+
+const StorySearch: React.FC<StorySearchProps> = (props: StorySearchProps) => {
+    const {navigation} = props;
     const search = useForm({value: ''});
     const dispatch = useAppDispatch();
     const searchResponse = useAppSelector((state) => state.search);
@@ -51,7 +57,11 @@ const StorySearch: React.FC = () => {
     };
 
     const _onClickListItem = useCallback(
-        (id: number) => console.log('id-->', id),
+        (id: number) =>
+            navigation.navigate(RouteName.STORY_DETAIL, {
+                id,
+                from: DetailsType.SEARCH,
+            }),
         [],
     );
 

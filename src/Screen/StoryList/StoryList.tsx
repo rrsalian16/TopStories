@@ -8,6 +8,7 @@ import {ActivityIndicator} from '@react-native-material/core';
 import {DashbaordStackScreenProp} from '@TopStories/Routes/type';
 import {RouteName} from '@TopStories/Routes/routeName';
 import {AppUtils} from '@TopStories/Utils';
+import {DetailsType} from '../StoryDetail/type';
 
 type StoryListProps = DashbaordStackScreenProp<RouteName.STORY_LIST>;
 const TITLE_LIMIT = 50;
@@ -28,7 +29,11 @@ const StoryList: React.FC<StoryListProps> = (props: StoryListProps) => {
     }, [storyType]);
 
     const _onClickListItem = useCallback(
-        (id: number) => navigation.navigate(RouteName.STORY_DETAIL, {id}),
+        (id: number) =>
+            navigation.navigate(RouteName.STORY_DETAIL, {
+                id,
+                from: DetailsType.LIST,
+            }),
         [],
     );
 
