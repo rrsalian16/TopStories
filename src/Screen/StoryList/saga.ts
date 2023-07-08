@@ -10,8 +10,8 @@ type ResponseTyp = {
     results: StoryType[];
 };
 
-export default function* dashboardSagaWatcher() {
-    yield takeLatest(request, dashboardSagaWorker);
+export default function* sotryListSagaWatcher() {
+    yield takeLatest(request, sotryListSagaWorker);
 }
 
 export function userStoryList(key: string) {
@@ -23,7 +23,7 @@ export function userStoryList(key: string) {
     return Network.networkCall(config);
 }
 
-export function* dashboardSagaWorker({payload}: ReturnType<typeof request>) {
+export function* sotryListSagaWorker({payload}: ReturnType<typeof request>) {
     try {
         const response: AxiosResponse<ResponseTyp> = yield call(
             userStoryList,
