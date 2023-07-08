@@ -1,4 +1,4 @@
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, FlatList} from 'react-native';
 import React, {useCallback, useEffect} from 'react';
 import {Error, Header, Layout, StoryItem, Text} from '@TopStories/Component';
 import {StoryListActions} from '.';
@@ -51,28 +51,37 @@ const StoryList: React.FC<StoryListProps> = (props: StoryListProps) => {
             </Layout.Scrollable>
         );
 
-    const _renderStoryList = () =>
-        data.map(({uri, title, multimedia, section}, index) => {
-            const _title = AppUtils.getTrimedString(title, TITLE_LIMIT);
-            const leading = multimedia && multimedia[0]?.url;
+    const _renderStoryList = () => (
+        <FlatList
+            style={style.flatList}
+            showsVerticalScrollIndicator={false}
+            data={data}
+            keyExtractor={(item) => item.uri}
+            onEndReachedThreshold={0.2}
+            renderItem={({item, index}) => {
+                const {uri, title, multimedia, section} = item;
+                const _title = AppUtils.getTrimedString(title, TITLE_LIMIT);
+                const leading = multimedia && multimedia[0]?.url;
 
-            return (
-                <StoryItem
-                    onPress={() => _onClickListItem(index)}
-                    key={uri}
-                    title={_title}
-                    leadingUrl={leading}
-                    overline={section}
-                />
-            );
-        });
+                return (
+                    <StoryItem
+                        onPress={() => _onClickListItem(index)}
+                        key={uri}
+                        title={_title}
+                        leadingUrl={leading}
+                        overline={section}
+                    />
+                );
+            }}
+        />
+    );
 
     return (
-        <Layout.Scrollable
+        <Layout.Base
             header={<Header title={`Stories : ${capitalize(storyType)}`} />}>
             {!data && error && <Error />}
             {_renderStoryList()}
-        </Layout.Scrollable>
+        </Layout.Base>
     );
 };
 
@@ -92,6 +101,9 @@ const style = StyleSheet.create({
         width: '100%',
         height: '100%',
         borderRadius: 3,
+    },
+    flatList: {
+        marginBottom: 10,
     },
 });
 

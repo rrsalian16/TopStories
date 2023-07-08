@@ -94,14 +94,14 @@ const StorySearch: React.FC<StorySearchProps> = (props: StorySearchProps) => {
 
     const _renderStoryList = () => (
         <FlatList
-            style={{marginBottom: 150}}
+            style={style.flatList}
             showsVerticalScrollIndicator={false}
             data={data?.docs}
             onEndReached={onEndReached}
-            keyExtractor={(item) => item.pub_date}
+            keyExtractor={({pub_date, _id}, index) => pub_date + _id + index}
             onEndReachedThreshold={0.2}
             renderItem={({item, index}) => {
-                const {abstract, multimedia, section_name, _id} = item;
+                const {abstract, multimedia, section_name} = item;
                 const _title = AppUtils.getTrimedString(abstract, TITLE_LIMIT);
                 const leading =
                     multimedia[0]?.url && IMAGE_BASE_URL + multimedia[0]?.url;
@@ -162,6 +162,9 @@ const style = StyleSheet.create({
     },
     banner: {
         margin: 3,
+    },
+    flatList: {
+        marginBottom: 150,
     },
 });
 
