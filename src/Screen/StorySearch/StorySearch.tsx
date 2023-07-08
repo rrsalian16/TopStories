@@ -1,4 +1,4 @@
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import React, {useCallback, useEffect} from 'react';
 import {
     Header,
@@ -11,7 +11,7 @@ import {useForm} from '@TopStories/Hook';
 import {useAppDispatch, useAppSelector} from '@TopStories/Hook/redux';
 import {debounce, get} from 'lodash';
 import {StorySearchActions} from '.';
-import {ActivityIndicator} from '@react-native-material/core';
+import {ActivityIndicator, Badge} from '@react-native-material/core';
 import {AppUtils} from '@TopStories/Utils';
 
 const TITLE_LIMIT = 50;
@@ -23,9 +23,10 @@ const StorySearch: React.FC = () => {
     const searchResponse = useAppSelector((state) => state.search);
     const searchValue = search.value;
 
-    const isLoading = get(searchResponse, ['loading']);
-    const error = get(searchResponse, ['error']);
     const data = get(searchResponse, ['data']);
+    const error = get(searchResponse, ['error']);
+    const isLoading = get(searchResponse, ['loading']);
+    const lastSearchValue = get(searchResponse, ['history']);
 
     useEffect(() => {
         searchValue && debouncedSearch(searchValue);
@@ -43,16 +44,29 @@ const StorySearch: React.FC = () => {
     };
 
     const debouncedSearch = useCallback(debounce(searchStory, 300), []);
-    const isNoResultFound = !data?.docs.length && !isLoading && searchValue;
+    const isNoResultFound = !!error && !isLoading && searchValue;
 
     const _onEndEditing = () => {
-        //Persisst the value for show last 5 search
-        return;
+        searchValue && dispatch(StorySearchActions.adddHistory(searchValue));
     };
 
     const _onClickListItem = useCallback(
         (id: number) => console.log('id-->', id),
         [],
+    );
+
+    const onPressHistoryBanner = (value: string) => search.setValue(value);
+
+    const showSearchHistory = () => (
+        <View style={style.bannerContainer}>
+            {lastSearchValue.map((value: string) => (
+                <TouchableOpacity
+                    key={value}
+                    onPress={() => onPressHistoryBanner(value)}>
+                    <Badge style={style.banner} label={value} color='#52232d' />
+                </TouchableOpacity>
+            ))}
+        </View>
     );
 
     const _renderStoryList = () =>
@@ -80,10 +94,11 @@ const StorySearch: React.FC = () => {
                     {...search}
                     onEndEditing={_onEndEditing}
                 />
+                {showSearchHistory()}
             </View>
-            {isNoResultFound && <Text>No Resutl Found</Text>}
             {isLoading && <ActivityIndicator style={style.loader} />}
             {data?.docs.length && _renderStoryList()}
+            {isNoResultFound && <Text>No Resutl Found</Text>}
         </Layout.Scrollable>
     );
 };
@@ -107,6 +122,14 @@ const style = StyleSheet.create({
         width: '100%',
         height: '100%',
         borderRadius: 3,
+    },
+    bannerContainer: {
+        flexDirection: 'row',
+        marginVertical: 5,
+        flexWrap: 'wrap',
+    },
+    banner: {
+        margin: 3,
     },
 });
 

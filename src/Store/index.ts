@@ -10,7 +10,7 @@ import rootSaga from './saga';
 const persistConfig = {
     key: 'root',
     storage: AsyncStorage,
-    whitelist: [], // Array of reducers to persist
+    whitelist: ['search'], // Array of reducers to persist
 };
 
 const sagaMiddleware = createSagaMiddleware();

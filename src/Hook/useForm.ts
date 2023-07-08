@@ -25,7 +25,14 @@ const useForm = <T>(props: UseFormProp<T>) => {
 
     const isError = !!(!isValid && _value);
 
-    return {value: _value, isValid, isError, onChangeText, onEndEditing};
+    return {
+        value: _value,
+        isValid,
+        isError,
+        onChangeText,
+        onEndEditing,
+        setValue,
+    };
 };
 
 export default useForm;

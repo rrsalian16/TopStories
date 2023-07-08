@@ -33,6 +33,8 @@ const StoryItem: React.FC<StoryItemProps> = (props: StoryItemProps) => {
 
     const leadingImage = getLeadingImage(leadingUrl);
 
+    if (!title) return null;
+
     return (
         <View style={style.listStyle} key={key}>
             <ListItem
