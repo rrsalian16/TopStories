@@ -1,3 +1,13 @@
 {
-  "extends": "@tsconfig/react-native/tsconfig.json"
+    "extends": "@tsconfig/react-native/tsconfig.json",
+    "compilerOptions": {
+        "jsx": "react",
+        "skipLibCheck": true,
+        "moduleResolution": "node",
+        "allowSyntheticDefaultImports": true,
+        "baseUrl": ".",
+        "paths": {
+            "@TopStories/*": ["src/*"]
+        }
+    }
 }
