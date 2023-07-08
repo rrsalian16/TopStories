@@ -1,24 +1,39 @@
-# TopStories
+# TopStories 🧾
 
-#### World - Science
+-   🚀 Install Packages
 
-#### reducer
+```bash
+#To install packages
+yarn install
 
-#### network axios
+#To install pod installa
+npx pod-install ios
 
-#### Material UI
+```
 
-#### fake api setup
+-   📱 iOS
 
-####
+```bash
+#To run the app 🏃‍♂️
+yarn ios
 
--   App should run on Android &amp; iOS
--   Use of Redux for error handling and data persistence.
--   Use of Axios
--   Unit test and code coverage
--   Use of material UI.
--   Code to be generic and simple
--   Leverage today’s best coding practices
--   Clear README.md that explains how the code and the test can be run, how the
-    coverage reports can be generated and how the local server can run.
--   Design is up to you.
+#To run on iPhone 14 simulator 🏃‍♂️
+yarn ios:14
+
+#To clean ios 🚨
+yarn clean:ios
+
+```
+
+-   ☎️ Android
+
+```bash
+#To run on android 🏃‍♂️
+yarn android
+
+#To build android release apk 🛠️
+yarn android:release
+
+#To clean android 🚨
+yarn clean:android
+```
