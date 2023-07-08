@@ -11,6 +11,11 @@ type HeaderProps = {
     hideRight?: boolean;
 };
 
+type IconProps = {
+    color: string;
+    size: number;
+};
+
 const Header: React.FC<HeaderProps> = (props: HeaderProps) => {
     const {isLoggedIn = false, logOut} = useIsLoggedIn();
 
@@ -21,29 +26,36 @@ const Header: React.FC<HeaderProps> = (props: HeaderProps) => {
         hideRight = false,
     } = props;
 
+    console.log('isLoggedIn:Header', isLoggedIn);
+
     const _hideRight = !(isLoggedIn && !hideRight);
+
+    const leftIcon = (props: IconProps) => {
+        if (hideLeft) return <></>;
+        return (
+            <IconButton
+                onPress={RouteService.goBack}
+                icon={(props) => <Icon name='arrow-left' {...props} />}
+                {...props}
+            />
+        );
+    };
 
     return (
         <AppBar
             style={style.appBar}
-            leading={(props) => (
-                <IconButton
-                    onPress={RouteService.goBack}
-                    icon={(props) =>
-                        !hideLeft && <Icon name='arrow-left' {...props} />
-                    }
-                    {...props}
-                />
-            )}
-            trailing={(props) => (
-                <IconButton
-                    onPress={() => logOut()}
-                    icon={(props) =>
-                        !_hideRight && <Icon name='logout-variant' {...props} />
-                    }
-                    {...props}
-                />
-            )}
+            leading={(props) => leftIcon(props)}
+            trailing={(props) =>
+                !_hideRight && (
+                    <IconButton
+                        onPress={() => logOut()}
+                        icon={(props) => (
+                            <Icon name='logout-variant' {...props} />
+                        )}
+                        {...props}
+                    />
+                )
+            }
             title={title}
             centerTitle={centerTitle}
         />
