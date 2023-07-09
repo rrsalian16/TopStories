@@ -25,6 +25,7 @@ const Dashboard: React.FC<DashboardProps> = (props: DashboardProps) => {
         <Layout.Base header={<Header title='Dashbaord' hideLeft />}>
             <View style={style.container}>
                 <TouchableOpacity
+                    testID='science-card'
                     style={style.cardContainer}
                     onPress={() => _onClickCard(StoryTypes.SCIENCE)}>
                     <Image style={style.cardImage} source={PNG_IMAGE.science} />
@@ -33,6 +34,7 @@ const Dashboard: React.FC<DashboardProps> = (props: DashboardProps) => {
                     </Text>
                 </TouchableOpacity>
                 <TouchableOpacity
+                    testID='world-card'
                     style={style.cardContainer}
                     onPress={() => _onClickCard(StoryTypes.WORLD)}>
                     <Image style={style.cardImage} source={PNG_IMAGE.world} />

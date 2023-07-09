@@ -12,7 +12,8 @@ import {useAppSelector} from '@TopStories/Hook';
 
 const IMAGE_BASE_URL = 'https://www.nytimes.com/';
 
-type StoryDetailProps = DashbaordStackScreenProp<RouteName.STORY_DETAIL>;
+export type StoryDetailProps = DashbaordStackScreenProp<RouteName.STORY_DETAIL>;
+
 const DATE_FORMATE = {
     weekday: 'long',
     year: 'numeric',

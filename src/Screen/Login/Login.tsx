@@ -63,7 +63,7 @@ const Login: React.FC<LoginProps> = (props: LoginProps) => {
                 // disabled={isLoginDisabled}
                 onPress={_onClickLogin}
                 variant='contained'
-                title='login'
+                title='Login'
             />
             <Box h={8} />
             {errorMsg && <Text style={style.error}>{errorMsg}</Text>}

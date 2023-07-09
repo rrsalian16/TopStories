@@ -10,7 +10,7 @@ import {AppUtils} from '@TopStories/Utils';
 import {DetailsType} from '../StoryDetail/type';
 import {useAppDispatch, useAppSelector} from '@TopStories/Hook';
 
-type StoryListProps = DashbaordStackScreenProp<RouteName.STORY_LIST>;
+export type StoryListProps = DashbaordStackScreenProp<RouteName.STORY_LIST>;
 const TITLE_LIMIT = 50;
 
 const StoryList: React.FC<StoryListProps> = (props: StoryListProps) => {

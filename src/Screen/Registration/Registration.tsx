@@ -5,7 +5,7 @@ import {useForm, useAuth} from '@TopStories/Hook';
 import {AuthStackScreenProp} from '@TopStories/Routes/type';
 import {RouteName} from '@TopStories/Routes/routeName';
 
-type RegistrationProps = AuthStackScreenProp<RouteName.REGISTRATION>;
+export type RegistrationProps = AuthStackScreenProp<RouteName.REGISTRATION>;
 
 const Registration: React.FC<RegistrationProps> = (
     props: RegistrationProps,

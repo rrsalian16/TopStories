@@ -24,7 +24,7 @@ import {DetailsType} from '../StoryDetail/type';
 const TITLE_LIMIT = 50;
 const IMAGE_BASE_URL = 'https://www.nytimes.com/';
 
-type StorySearchProps = DashbaordStackScreenProp<RouteName.STORY_SEARCH>;
+export type StorySearchProps = DashbaordStackScreenProp<RouteName.STORY_SEARCH>;
 
 const StorySearch: React.FC<StorySearchProps> = (props: StorySearchProps) => {
     const {navigation} = props;
@@ -85,6 +85,7 @@ const StorySearch: React.FC<StorySearchProps> = (props: StorySearchProps) => {
             {lastSearchValue.map((value: string) => (
                 <TouchableOpacity
                     key={value}
+                    testID='search-history-banner-container'
                     onPress={() => onPressHistoryBanner(value)}>
                     <Badge style={style.banner} label={value} color='#52232d' />
                 </TouchableOpacity>
