@@ -5,7 +5,7 @@ import {RouteName} from '@TopStories/Routes/routeName';
 import {Button, Header, Layout, Text} from '@TopStories/Component';
 import {PNG_IMAGE} from '@TopStories/Assets';
 
-type DashboardProps = DashbaordStackScreenProp<RouteName.DASHBOARD>;
+export type DashboardProps = DashbaordStackScreenProp<RouteName.DASHBOARD>;
 
 enum StoryTypes {
     SCIENCE = 'science',
