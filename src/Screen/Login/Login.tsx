@@ -15,7 +15,7 @@ import {get} from 'lodash';
 import {Text} from '@react-native-material/core';
 import {StyleSheet} from 'react-native';
 
-type LoginProps = AuthStackScreenProp<RouteName.LOGIN>;
+export type LoginProps = AuthStackScreenProp<RouteName.LOGIN>;
 
 const Login: React.FC<LoginProps> = (props: LoginProps) => {
     const {navigation} = props;

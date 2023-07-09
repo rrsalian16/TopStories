@@ -1,17 +1,11 @@
-/**
- * @format
- */
-
-import 'react-native';
-import React from 'react';
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+import {_render} from '@TopStories/Utils/testUtils';
 import App from '../App';
+import React from 'react';
+import 'react-native';
 
-// Note: import explicitly to use the types shiped with jest.
-import {it} from '@jest/globals';
-
-// Note: test renderer must be required after react-native.
-import renderer from 'react-test-renderer';
+//@ts-ignore
 
 it('renders correctly', () => {
-    renderer.create(<App />);
+    _render(<App />);
 });

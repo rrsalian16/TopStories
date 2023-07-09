@@ -1,5 +1,7 @@
 # TopStories 🧾
 
+&nbsp;
+
 -   🚀 Install Packages
 
 ```bash
@@ -10,6 +12,8 @@ yarn install
 npx pod-install ios
 
 ```
+
+&nbsp;
 
 -   📱 iOS
 
@@ -25,6 +29,8 @@ yarn clean:ios
 
 ```
 
+&nbsp;
+
 -   ☎️ Android
 
 ```bash
@@ -37,3 +43,39 @@ yarn android:release
 #To clean android 🚨
 yarn clean:android
 ```
+
+&nbsp;
+
+-   🧪 Test
+
+```bash
+
+#To run test
+yarn test
+
+#To coverage report
+yarn test:coverage
+
+```
+
+&nbsp;
+
+-   🖥️ Local Server
+
+[Fake Api Server][fakeServer]
+
+Clone [this][fakeServer] repo and run the following command for
+
+```bash
+
+# to install dependency
+npm install
+
+#To run server
+npm run start-auth
+
+```
+
+<!-- sources -->
+
+[fakeServer]: https://github.com/techiediaries/fake-api-jwt-json-server
